@@ -172,7 +172,7 @@ export default function SubjectPage({ params }: SubjectPageProps) {
         <div className="text-center">
           <h1 className="text-2xl font-bold mb-4">Subject Not Found</h1>
           <p className="text-muted-foreground mb-6">The subject you&apos;re looking for doesn&apos;t exist.</p>
-          <Button onClick={() => router.push('/')}>
+          <Button onClick={() => router.push('/dashboard')}>
             Go Back to Dashboard
           </Button>
         </div>
@@ -196,11 +196,13 @@ export default function SubjectPage({ params }: SubjectPageProps) {
   };
 
   const handleAnalyticsSelect = () => {
-    router.push(`/subjects/${subject}/analytics`);
+    // router.push(`/subjects/${subject}/analytics`);
+    router.push(`/analytics`);
   };
 
   const handleNotesSelect = () => {
-    router.push(`/subjects/${subject}/notes`);
+    // router.push(`/subjects/${subject}/notes`);
+    router.push(`/notes-and-saved`);
   };
 
   return (
