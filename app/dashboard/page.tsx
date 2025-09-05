@@ -175,7 +175,7 @@ export default function Dashboard() {
                     <div className="flex space-x-2">
                       <Button 
                         className="flex-1" 
-                        onClick={() => redirect(`/study-interface?subjectId=${subject.id}`)}
+                        onClick={() => redirect(`/subject-view`)}
                       >
                         Start Practice
                       </Button>
