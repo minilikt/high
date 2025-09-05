@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Calendar, Clock, BookOpen, BarChart3, NotebookPen, GraduationCap, Play, FileText } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useRouter } from 'next/navigation';
+import { redirect } from 'next/navigation';
 import { use } from "react";
 
 // Define the subject data structure
@@ -162,7 +162,6 @@ interface SubjectPageProps {
 }
 
 export default function SubjectPage({ params }: SubjectPageProps) {
-  const router = useRouter();
   const { subject } = use(params);
   const subjectInfo = subjectData[subject];
   
@@ -172,7 +171,7 @@ export default function SubjectPage({ params }: SubjectPageProps) {
         <div className="text-center">
           <h1 className="text-2xl font-bold mb-4">Subject Not Found</h1>
           <p className="text-muted-foreground mb-6">The subject you&apos;re looking for doesn&apos;t exist.</p>
-          <Button onClick={() => router.push('/dashboard')}>
+          <Button onClick={() => redirect('/dashboard')}>
             Go Back to Dashboard
           </Button>
         </div>
@@ -182,27 +181,27 @@ export default function SubjectPage({ params }: SubjectPageProps) {
 
   // Handler functions for navigation
   const handleMockExamSelect = (year: number) => {
-    router.push(`/subjects/${subject}/exam/mock/${year}`);
+    redirect(`/subjects/${subject}/exam/mock/${year}`);
   };
 
   const handlePracticeSelect = (topic: string) => {
     const topicSlug = topic.toLowerCase().replace(/\s+/g, '-');
-    router.push(`/subjects/${subject}/practice/${topicSlug}`);
+    redirect(`/subjects/${subject}/practice/${topicSlug}`);
   };
 
   const handleStudySelect = (topic: string) => {
     const topicSlug = topic.toLowerCase().replace(/\s+/g, '-');
-    router.push(`/subjects/${subject}/study/${topicSlug}`);
+    redirect(`/subjects/${subject}/study/${topicSlug}`);
   };
 
   const handleAnalyticsSelect = () => {
-    // router.push(`/subjects/${subject}/analytics`);
-    router.push(`/analytics`);
+    // redirect(`/subjects/${subject}/analytics`);
+    redirect(`/analytics`);
   };
 
   const handleNotesSelect = () => {
-    // router.push(`/subjects/${subject}/notes`);
-    router.push(`/notes-and-saved`);
+    // redirect(`/subjects/${subject}/notes`);
+    redirect(`/notes-and-saved`);
   };
 
   return (
@@ -213,7 +212,7 @@ export default function SubjectPage({ params }: SubjectPageProps) {
           <div className="flex items-center justify-between mb-4">
             <Button 
               variant="ghost" 
-              onClick={() => router.push('/')}
+              onClick={() => redirect('/')}
             >
               <ArrowLeft className="mr-2 h-4 w-4" />
               Back to Dashboard

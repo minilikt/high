@@ -1,6 +1,4 @@
-// app/subjects/[subject]/exam/[type]/[id]/page.tsx
 "use client";
-
 import { useState, useEffect, useCallback } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";

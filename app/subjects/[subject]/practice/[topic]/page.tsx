@@ -1,4 +1,3 @@
-// app/subjects/[subject]/practice/[topicSlug]/page.tsx
 "use client";
 
 import { useState, useEffect, useCallback } from 'react';
@@ -9,7 +8,7 @@ import { Progress } from "@/components/ui/progress";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 import { Clock, ArrowLeft, ArrowRight, Flag, CheckCircle2, Bookmark, Loader2, } from "lucide-react";
 import { toast } from "sonner";
-import { useParams, useRouter } from 'next/navigation';
+import { useParams, redirect } from 'next/navigation';
 
 interface PracticeQuestion {
   id: string;
@@ -211,7 +210,6 @@ const getTopicNameFromSlug = (slug: string | undefined): string => {
 
 export default function PracticeExamPage() {
   const params = useParams();
-  const router = useRouter();
   const subjectId = params.subject as string;
   const topic = params.topic as string;
   const topicName = getTopicNameFromSlug(topic);
@@ -275,8 +273,8 @@ export default function PracticeExamPage() {
     toast.success('Practice completed!');
     
     // Navigate to results page
-    router.push(`/subjects/${subjectId}/practice/results?score=${results.score}&total=${results.totalQuestions}&time=${results.timeSpent}&topic=${encodeURIComponent(topicName)}`);
-  }, [questions, answers, timeLeft, router, subjectId, topicName]);
+    redirect(`/subjects/${subjectId}/practice/results?score=${results.score}&total=${results.totalQuestions}&time=${results.timeSpent}&topic=${encodeURIComponent(topicName)}`);
+  }, [questions, answers, timeLeft, subjectId, topicName]);
   useEffect(() => {
     if (!isExamStarted || timeLeft <= 0) return;
 
@@ -360,11 +358,11 @@ export default function PracticeExamPage() {
 
 
   const handleBack = () => {
-    router.push(`/subjects/${subjectId}`);
+    redirect(`/subjects/${subjectId}`);
   };
 
 //   const handleAnalytics = () => {
-//     router.push(`/subjects/${subjectId}/analytics`);
+//     redirect(`/subjects/${subjectId}/analytics`);
 //   };
 
   if (isLoadingQuestions) {

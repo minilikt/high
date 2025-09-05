@@ -1,4 +1,3 @@
-// app/subjects/[subject]/study/[topic]/page.tsx
 "use client";
 
 import { useState } from 'react';
@@ -15,7 +14,7 @@ import { Label } from "@/components/ui/label";
 import { ArrowLeft, Clock, CheckCircle2, Circle, NotebookPen, Bookmark, HelpCircle, ChevronLeft, ChevronRight, List, Search, ExternalLink, Target } from "lucide-react";
 import { toast } from "sonner";
 import Image from 'next/image';
-import { useParams, useRouter } from 'next/navigation';
+import { redirect, useParams } from 'next/navigation';
 
 interface QuizQuestion {
   question: string;
@@ -428,7 +427,6 @@ Motion is the change in position of an object with respect to time.
 
 export default function StudyPage() {
   const params = useParams();
-  const router = useRouter();
   const subjectId = params.subject as string;
   const topicId = params.topic as string;
   
@@ -491,11 +489,11 @@ export default function StudyPage() {
   };
 
   const handleNotesSelect = () => {
-    router.push(`/subjects/${subjectId}/notes`);
+    redirect(`/subjects/${subjectId}/notes`);
   };
 
   const handleBack = () => {
-    router.push(`/subjects/${subjectId}`);
+    redirect(`/subjects/${subjectId}`);
   };
 
   const renderContent = (content: StudyContent) => {
